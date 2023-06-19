@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block main %}
+    <div>
+        <p>Here is a little summary about you!!!</p>
+    </div>
+    <div class="mx-auto" style="width: 600px;">
+        <table class="table table-striped">
+            <tr>
+                <td style="width:200px;">Your Gender</td>
+                {% if rows[0]["gender"] == "M" %}
+                    <td style="width:200px;">Male</td>
+                {% endif %}
+                {% if rows[0]["gender"] == "F" %}
+                    <td style="width:200px;">Female/td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td style="width:200px;">Your Age</td>
+                <td style="width:200px;">{{rows[0]["age"]}} years</td>
+            </tr>
+            <tr>
+                <td style="width:200px;">Your Height</td>
+                <td style="width:200px;">{{rows[0]["height"]}} centimeters</td>
+            </tr>
+            <tr>
+                <td style="width:200px;">Your Weight</td>
+                <td style="width:200px;">{{rows[0]["weight"]}} kilograms</td>
+            </tr>
+            <tr>
+                <td style="width:200px;">Activity level</td>
+                {% if rows[0]["activity"] == "sedantry" %}
+                    <td style="width:200px;">No exercise</td>
+                {% endif %}
+                {% if rows[0]["activity"] == "active" %}
+                    <td style="width:200px;">Exercise 2-3 times a week</td>
+                {% endif %}
+                {% if rows[0]["activity"] == "intense" %}
+                    <td style="width:200px;">Exercise 3-5 times a week</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td style="width:200px;">Your goal</td>
+                {% if rows[0]["goal"] == "loss" %}
+                    <td style="width:200px;">Weight loss</td>
+                {% endif %}
+                {% if rows[0]["goal"] == "gain" %}
+                    <td style="width:200px;">Weight gain</td>
+                {% endif %}
+                {% if rows[0]["goal"] == "maintain" %}
+                    <td style="width:200px;">Maintaining your weight</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td style="width:200px;">Your basal metabolic rate</td>
+                <td style="width:200px;">{{rows[0]["BMR"]}} calories per day</td>
+            </tr>
+            <tr>
+                <td style="width:200px;">Required calories for goal</td>
+                <td style="width:200px;">{{rows[0]["cal"]}} calories per day</td>
+            </tr>
+            <tr>
+                <td style="width:200px;">Calories consumed today</td>
+                <td style="width:200px;">{{cal_today[0]["sum"]}} calories</td>
+            </tr>
+            <tr>
+                <td style="width:200px;">Remaining calories for today</td>
+                <td style="width:200px;">{{rem_cal}} calories</td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}

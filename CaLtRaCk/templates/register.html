@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <div class="center-heads">
+        <p>Register to improve your health!!!</p>
+    </div>
+    <form action="/register" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="name" name="name" placeholder="Your name" type="text">
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Unique Username (case insensitive)" type="text">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="confirmation" name="confirmation" placeholder="Confirmation Password" type="text">
+            <label for="confirmation" style="font-size: 12px;">Password length more than 6 characters</label><br>
+            <label for="confirmation" style="font-size: 12px;">Should have at least one uppercase character</label><br>
+            <label for="confirmation" style="font-size: 12px;">Should have at least one lowercase character</label><br>
+            <label for="confirmation" style="font-size: 12px;">Should have one number</label><br>
+            <label for="confirmation" style="font-size: 12px;">Should have one special character [*_@$]</label><br>
+            <label for="confirmation" style="font-size: 12px;">Should not have any spaces</label><br>
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+{% endblock %}

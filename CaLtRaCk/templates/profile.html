@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block main %}
+    <div class="mb-3">
+        <form action="/profile" method="post">
+            <p>
+                <div class="form-check form-check-inline">
+                    <label>Gender: &nbsp;</label>
+                    <input type="radio" id="male" name="gender" value="m">
+                    <label for="male">Male</label>
+                    <input type="radio" id="female" name="gender" value="f">
+                    <label for="female">Female</label>
+                </div>
+            </p>
+            <div class="pt-3">
+                <div class="container">
+                    <div class="row">
+                        <input class="col mx-5 form-control" type="number" min="1" name="age" placeholder="Age in years">
+                        <input class="col mx-5 form-control" type="number" min="1" step="0.001" name="weight" placeholder="Weight in kilograms">
+                        <input class="col mx-5 form-control" type="number" min="0.01" step="0.01" name="height" placeholder="Height in centimeters">
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-5">
+                <div class="col">
+                    <div style="width: 250px; margin-left: 400px;">
+                        <select class="form-select" id="activity" name="activity">
+                            <option disabled selected>Select activity level</option>
+                            <option value="sedentary">No exercise</option>
+                            <option value="active">2-3 days a week</option>
+                            <option value="intense">3-5 days a week</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div style="width: 250px;">
+                        <select class="form-select" id="goal" name="goal">
+                            <option disabled selected>Select health goal</option>
+                            <option value="maintain">Maintain weight</option>
+                            <option value="loss">Steady weight loss</option>
+                            <option value="gain">Steady weight gain</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-5">
+                <button class="btn btn-success" type="submit">Set Profile</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

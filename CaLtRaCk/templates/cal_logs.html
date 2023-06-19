@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Calorie intake logs
+{% endblock %}
+
+{% block main %}
+    <div class="mx-auto" style="width: 600px">
+        <form action="/cal_logs" class="row g-3" method="post">
+            <div class="mx-auto" style="width: 250px;">
+                <label for="food" class="form-label">Food</label>
+                <input type="text" class="form-control" name="food" id="food">
+            </div>
+            <div class="mx-auto" style="width: 250px;">
+                <label for="calories" class="form-label">Calories</label>
+                <input type="Number" class="form-control" name="calories" id="calories" min="0" step="0.01">
+            </div>
+            <div class="mx-auto">
+                <button type="submit" class="btn btn-primary btn-block mb-4">Log entry</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="row pt-4" style="height: 350px;">
+        <div class="col" style="width: 500px; text-align: left;">
+            <label style="margin-left: 125px;"><h6>Datewise summary of total calories consumed!!</h6></label>
+            <div style="max-height: 300px; width: 400px; margin-left: 100px; overflow-y: auto;">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Total calories consumed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for log in logs %}
+                            <tr>
+                                <td>{{log["date"]}}</td>
+                                <td>{{log["sum"]}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col">
+            <label style="margin-right: 70px;"><h6>Detailed consumption logs for the selected date!!</h6></label>
+            <div style="margin-left:100px">
+                <div class="pt-1"></div>
+                <form action="/cal_logs" method="post">
+                    <select class="form-select" style="width: 150px; height: 40px; margin-left:120px" name="view">
+                        <option disabled selected>Select Date</option>
+                        {% for date in date_p %}
+                            {% set val = date["date"] %}
+                            <option value="{{val}}">{{date["date"]}}</option>
+                        {% endfor %}
+                    </select>
+                    <div style="height: 5px;"></div>
+                    <button type="submit" name="view_logs" value="foo" class="btn btn-primary" style="margin-right: 150px; font-size: 12px;">View Logs</button>
+                </form>
+            </div>
+            {% if rows %}
+                <div class="mx-auto" style="max-height: 250px; overflow-y: auto; width: 600px; padding-top: 20px;">
+                    <form action="/cal_logs" method="post">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Food consumed</th>
+                                    <th>Calories consumed</th>
+                                    <th>Date of comsumption</th>
+                                    <th>Time of consumption</th>
+                                </tr>
+                            </thead>
+                            {% for row in rows %}
+                                {% set log_id = row["log_id"] %}
+                                <tr>
+                                    <td>{{row["food"]}}</td>
+                                    <td>{{row["calories"]}}</td>
+                                    <td>{{row["date"]}}</td>
+                                    <td>{{row["logged_time"]}}</td>
+                                    <td><button type="submit" name="delete" value={{log_id}} class="btn btn-primary" style="font-size: 12px;">Delete</button></td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

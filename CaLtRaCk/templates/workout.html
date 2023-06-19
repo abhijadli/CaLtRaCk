@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    workout logs
+{% endblock %}
+
+{% block main %}
+    <div>
+        <div>
+            <h6>Here you can log your workouts, any specific notes or any observation that you want to remember.
+                 You can also view your previously logged workouts and the time you logged them at.</h6>
+        </div>
+        <div class="row pt-5" style="height: 400px;">
+            <div class="col">
+                <div>
+                    <form action="/workout" method="post">
+                        <div class="mb-3" style="width: 500px; height: 300px; background-color: grey;">
+                            <textarea class="form-control mx-auto" style="width: 500px; height: 300px;" id="workout" name="workout" maxlength="1000" placeholder="Log here"></textarea>
+                            <label for="workout" class="form-label">Maximum 1000 characters</label>
+                        </div>
+                        <div class="pt-3" style=" width: 150px; margin-left: 175px;">
+                            <button type="submit" class="btn btn-primary btn-block mb-4">Log this workout</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col">
+                <div>
+                    <form action="/workout" method="post">
+                        <div style="overflow: auto; overflow-x: hidden; height: 300px; width: 500px;">
+                            {% for log in logs %}
+                                <div class="container mx-0 pt-2" style="width: 400px;">
+                                    <textarea class="form-control" style="width: 400px; height: 200px;" value="Disabled readonly input" disabled readonly>{{log["logs"]}}</textarea>
+                                    <div class="pt-1">
+                                        {% set log_id = log["log_id"] %}
+                                        <label for="message" style="font-size: 12px;">Logged at: {{log["logged_time"]}}</label>
+                                        <button type="submit" name="delete" value={{log_id}} class="btn btn-success" style="margin-left: 30px;">Delete log</button>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
